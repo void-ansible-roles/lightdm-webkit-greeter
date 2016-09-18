@@ -1,0 +1,16 @@
+---
+- name: Install lightdm-webkit-greeter
+  xbps: pkg=lightdm-webkit-greeter state=present
+
+- name: Copy greeter override file
+  copy: src=90-lightdm-webkit.conf dest=/usr/share/lightdm/lightdm.conf.d/90-lightdm-webkit.conf owner=root group=root mode=0644
+
+- name: Configure lightdm-webkit-greeter
+  template: src=lightdm-webkit-greeter.conf dest=/etc/lightdm/lightdm-webkit-greeter.conf owner=root group=root mode=0644
+
+- name: Install local scripts
+  copy: src={{ item }} dest=/usr/local/bin/{{ item }} owner=root group=root mode=0755
+  with_items:
+    - fixScreens
+    - lightdm-setup
+    - lightdm-cleanup
