@@ -5,7 +5,7 @@
     state: present
 
 - name: Copy greeter override file
-  copy:
+  template:
     src: 90-lightdm-webkit.conf
     dest: /usr/share/lightdm/lightdm.conf.d/90-lightdm-webkit.conf
     owner: root
